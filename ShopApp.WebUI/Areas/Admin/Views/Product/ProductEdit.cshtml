@@ -1,0 +1,107 @@
+﻿@using ShopApp.Business.Models.VMs.CategoryVms
+@model ProductUpdateDto
+@{
+    var categories = ViewBag.Categories as List<CategoryVm>;
+}
+<form asp-controller="Product" asp-action="ProductEdit" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-8">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input type="hidden" name="ProductId" value="@Model.ProductId" />
+            <div class="form-group row mb-3">
+                <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Name" />
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label asp-for="Url" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Url" />
+                    <span class="text-danger" asp-validation-for="Url"></span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label asp-for="Description" class="col-sm-2 col-form-label" itemid="Description"></label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" asp-for="Description"></textarea>
+                    <span class="text-danger" asp-validation-for="Description"></span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label asp-for="Price" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Price" />
+                    <span class="text-danger" asp-validation-for="Price"></span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label asp-for="ImageUrl" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input type="hidden" asp-for="ImageUrl" />
+                    <img src="~/Img/@Model.ImageUrl" width="80" />
+                    <input type="file" name="file" />
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Update Product</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            @if (categories != null && categories.Any())
+            {
+                <h4>Categories</h4>
+                <hr />
+                @foreach (var category in categories)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="categoryIds" value="@category.CategoryId"
+                        @(Model.SelectedCategories.Contains(category.CategoryId) ? "checked" : "") />
+                        <label class="form-check-label">
+                            @category.Name
+                        </label>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No categories available.</p>
+            }
+            <hr />
+            <div class="custom-control custom-checkbox">
+                <input asp-for="IsApproved" type="checkbox" class="custom-control-input" />
+                <label asp-for="IsApproved" class="custom-control-label"></label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input asp-for="IsHome" type="checkbox" class="custom-control-input" />
+                <label asp-for="IsHome" class="custom-control-label"></label>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<script>
+    // CKEditor'u textarea öğesine dönüştür
+    ClassicEditor
+        .create(document.querySelector('#Description'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>

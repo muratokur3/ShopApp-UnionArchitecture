@@ -1,0 +1,31 @@
+﻿@model List<ProductVm>
+
+
+    <partial name="_header" />
+
+<div class="row">
+    <div class="col-md-3">
+        @await Component.InvokeAsync("Categories")
+        <partial name="_search" />
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            @if (Model != null)
+            {
+                <div class="row">
+                    @foreach (var product in Model)
+                    {
+                        <div class="col-md-4">
+                            @await Html.PartialAsync("_product", product)
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>Mevcut ürün yok.</p>
+            }
+           
+        </div>
+    </div>
+</div>

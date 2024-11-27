@@ -1,0 +1,52 @@
+﻿
+<nav class="navbar bg-primary navbar-dark navbar-expand-sm">
+    <div class="container">
+        <a href="/Admin" class="navbar-brand">
+            ShopApp
+        </a>
+        <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Product" asp-action="productlist" class="nav-link">
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Category" asp-action="categorylist" class="nav-link">
+                        Categories
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Role" asp-action="RoleList" class="nav-link">
+                        Role List
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="User" asp-action="UserList" class="nav-link">
+                        User List
+                    </a>
+                </li>
+           
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            
+                <li class="nav-item">
+                    <a asp-controller="account" asp-action="manage" class="nav-link">
+                        @User.Identity.Name
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="account" asp-action="logout" class="nav-link">
+                        Logout
+                    </a>
+                </li>
+           
+
+        </ul>
+
+
+
+
+
+    </div>
+</nav>
